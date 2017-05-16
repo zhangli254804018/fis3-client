@@ -1,0 +1,54 @@
+﻿
+#頻道推荐位（音乐/游戏/综艺）：
+#banner小广告（秀场/游戏）：
+頻道推荐位 和 banner小广告的數據由php頁面直接通過php變量傳入，數據結構可以查看測試頁面：
+array(5) {
+  ["img"]=>
+  string(59) "http://adimg.raidtalk.com.tw/ads/main_top_sess_1/474473.jpg" // 小圖
+  ["big_img"]=>
+  string(59) "http://adimg.raidtalk.com.tw/ads/main_top_sess_1/167715.jpg" // 大圖
+  ["url"]=>
+  string(7) "2078337" // 這個根據不同值確定是什麼鏈接，數字為綁定的主播uid，http開頭的是http鏈接，gamebox開頭的是遊戲代碼
+  ["show_report_url"]=>
+  string(79) "http://upload.raidcall.com.tw/statics/main_top_sess_1/830/8134121/70606/180.png" // 展示統計，每次展示請求一次，要求不重複請求
+  ["click_report_url"]=>
+  string(207) "http://upload.raidtalk.com.tw/actstate.php?param=O3%3BCW%3B%24%3B_EGKIE7%2F2F0%25%5E%60%24yV_7Cll2%21bfp%7DFQ-zKR-eAu%3Dz.%3B%3C%7EyI8l%7BJ%2B%600Oka%3AOva43+KhJ%7E3gGse4W%3C%22%3DB%3C%21%21Q%2B3VK%5B%2A%27O"  // 點擊統計，每次點擊請求一次，每次請求後面加隨機數據避免不能重複請求
+}
+
+
+#游戏推荐：
+http://game.raidtalk.com.tw/api/games?type=-1&size=15&page=1&callback=xxx
+參數說明：
+type		值固定為-1
+size		每頁記錄數
+page		頁碼
+callback		回調函數，可選參數，前端根據需要決定傳或不傳
+返回值說明：
+返回值數據結構跟當前版本首頁的接口差不多，可以直接訪問接口查看。
+不同的是數據裡加入了手遊的數據：
+"game_id": 1,
+"game_type": 2,  // 1 頁遊；2 手遊
+"game_name": "冰火之戈",
+"game_cover": "http://ads.raidtalk.com.tw/main/v820/img/mobile_game/mobile_game_icon.png",
+"play_code": "http://bhzg-m.rcgame99.com/", // 手遊的play_code是http鏈接，頁遊的是遊戲代碼
+"play_num": 0 // 手遊沒有玩家人數，所以默認為0
+
+
+#推荐群：
+http://ads.raidtalk.com.tw/api/get_sess_sorts.php?type=0&size=10&page=1&callback=xxx
+參數說明：
+type		值固定為0
+size		每頁記錄數
+page		頁碼
+callback		回調函數，可選參數，前端根據需要決定傳或不傳
+返回值說明：
+返回值數據結構跟當前版本首頁的接口一樣，可以直接訪問接口查看。
+
+
+flash播放器
+http://rcshow.tv/index.php?c=newHome&a=topFlashList
+我這邊會請求這個拿數據
+
+開發流程為
+npm run start
+npm run pro

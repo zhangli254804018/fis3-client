@@ -1,0 +1,163 @@
+#rc-rec {
+    &.singer-rec {
+        padding: 0 0 10px 0;
+        ul>li {
+            float: left;
+            width: 146px;
+            height: 195px; // padding: 10px 3px 0 10px;
+            margin: 7px;
+            overflow: hidden;
+            a.link-rec {
+                display: block;
+                margin: 0 0 2px 0;
+                .rec-mark {
+                    .ic-mask {
+                        position: absolute;
+                        z-index: 99;
+                        &.mark-live{
+                            width: 46px;
+                            height: 16px;
+                        }
+                         &.mark-game{
+                            width: 32px;
+                            height: 32px;
+                        }
+                    }
+                    .mark-song {
+                        display: block;
+                        height: 20px;
+                        color: @RCyellow;
+                        font-size: @font-12;
+                        background: url('@{live-url}ic_singer_voice_bg.png') no-repeat;
+                        background-size: 100% 100%;
+                        line-height: 20px;
+                        padding: 1px 10px 1px 5px;
+                        span.icon-singer-voice {
+                            .icon-desc();
+                            color: @RCoriage;
+                            padding: 0 0 0 15px;
+                            background: url('@{live-url}ic_singer_voice.gif') 0 center no-repeat;
+                        }
+                    }
+                    .mark-video {
+                        left: 0;
+                        right: 0;
+                        top: 0;
+                        bottom: 0;
+                        margin: auto;
+                        width: 40px;
+                        height: 40px;
+                        display: none;
+                    }
+                }
+                .res-imap {
+                    position: relative;
+                    margin: 0 0 8px 0;
+                    width: 146px;
+                    height: 146px;
+                    overflow: hidden;
+                    img {
+                        width: 100%;
+                        max-width: 100%;
+                        &.img{
+                            min-height: 146px;
+                        }
+                    }
+                    .mask {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        left: 0;
+                        top: 0;
+                        background: #000;
+                        opacity: 0;
+                        filter: alpha(opacity=0);
+                    }
+                }
+            }
+            .res-title {
+                height: 17px;
+                padding: 0 6px 8px 6px;
+                // width: 146px;
+                h3 {
+                    .nowrap();
+                    color: @RCwhite;
+                }
+                p {
+                    .nowrap();
+                }
+            }
+            .res-title,
+            .res-desc {
+                color: @RCgreyf;
+                font-size: @font-12;
+            }
+            .res-desc {
+                margin: 0 6px 5px;
+                .desc-personl {
+                    .icon-desc();
+                }
+                .desc-position {
+                    .icon-desc();
+                    // padding: 0 0 0 13px;
+                    background: url('@{img-url}ic_position.png') no-repeat;
+                    span {
+                        .nowrap();
+                    }
+                }
+                .desc-id {
+                    .icon-desc();
+                    // padding: 0 0 0 13px;
+                    background: url('@{img-url}ic_ID.png') no-repeat;
+                    span {
+                        .nowrap();
+                    }
+                }
+            }
+            &:hover {
+                a.link-rec {
+                    .res-imap {
+                        .img {
+                            max-width: 100%;
+                            transform: scale(1.1);
+                            transition: transform .3s
+                        }
+                    }
+                }
+            }
+            &.active {
+                border: 1px solid @RCyellow;
+                margin: 6px;
+                background: @RCgreyr;
+                a.link-rec {
+                    .rec-mark {
+                        .mark-video {
+                            display: block;
+                        }
+                        // .mark-live{
+                        //     display: none;
+                        // }
+                    }
+                }
+            }
+        }
+        &.game-rec {
+            ul>li {
+                a.link-rec {
+                    .res-title {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        .btn-more {
+            width: 100%;
+            a.go-more {
+                color: @RCgreyf;
+                display: block;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    }
+}

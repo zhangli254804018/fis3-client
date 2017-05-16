@@ -1,0 +1,78 @@
+#rc-tab {
+    margin: 0px 0 0 0;
+    a.link-tab {
+        float: left;
+        display: block;
+        width: 266px;
+        text-align: center;
+        background: @RCgrey;
+        padding: 9px 0;
+        span {
+            padding: 9px 0;
+            color: @RCgreyf;
+            font-size: @font-16;
+        }
+        &.icon-game {
+            margin: 0 1px;
+        }
+        // &:hover,
+        &.active {
+            background: @RCgreyl;
+            // .transition(300ms);
+            span {
+                color: @RCwhite;
+            }
+            &.icon-normal {
+                span {
+                    background: url('@{img-url}ic_singer_click.png') 0 center no-repeat;
+                }
+                &.icon-game {
+                    span {
+                        .icon-tab();
+                        background: url('@{img-url}ic_game_click.png') 0 center no-repeat;
+                    }
+                }
+                &.icon-team {
+                    span {
+                        .icon-tab();
+                        background: url('@{img-url}ic_team_click.png') 0 center no-repeat;
+                    }
+                }
+            }
+        }
+        &.icon-normal {
+            span {
+                .icon-tab();
+            }
+            &.icon-game {
+                span {
+                    .icon-tab();
+                    background: url('@{img-url}ic_game_nomal.png') 0 center no-repeat;
+                }
+            }
+            &.icon-team {
+                span {
+                    .icon-tab();
+                    background: url('@{img-url}ic_team_nomal.png') 0 center no-repeat;
+                }
+            }
+        }
+        &.hot{
+            span{
+                position: relative;
+                &:after{
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    bottom: 0;
+                    top: 0;
+                    right: -31px;
+                    margin: auto;
+                    width: 26px;
+                    height: 15px;
+                    background: url('@{live-url}ico_hot.gif') no-repeat;
+                }
+            }
+        }
+    }
+}

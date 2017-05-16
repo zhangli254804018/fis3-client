@@ -1,0 +1,134 @@
+html {
+    scrollbar-3dlight-color: #D4D0C8;
+    scrollbar-highlight-color: #FFF;
+    scrollbar-face-color: #F2F2F2;
+    scrollbar-arrow-color: #D7D7D7;
+    scrollbar-shadow-color: #808080;
+    scrollbar-darkshadow-color: #D7DCE0;
+    scrollbar-base-color: #D7DCE0;
+    scrollbar-track-color: #FFF;
+}
+
+
+/****************************** jquery.custom-scrollbar ******************************/
+
+.scrollable {
+    position: relative;
+}
+
+.scrollable .viewport {
+    position: relative;
+    overflow: hidden;
+}
+
+.scrollable .viewport .overview {
+    position: absolute;
+    width: 100%
+}
+
+.scrollable .scroll-bar {
+    display: none;
+}
+
+.scrollable .scroll-bar.vertical {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    z-index: 99;
+}
+
+.scrollable .scroll-bar.horizontal {
+    position: relative;
+    width: 100%;
+}
+
+.scrollable .scroll-bar .thumb {
+    position: absolute;
+}
+
+.scrollable .scroll-bar.vertical .thumb {
+    width: 100%;
+}
+
+.scrollable .scroll-bar.horizontal .thumb {
+    height: 100%;
+    left: 0;
+}
+
+.not-selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/*Default skin*/
+
+.scrollable.default-skin {
+    padding-right: 10px;
+    padding-bottom: 6px;
+    z-index: 99;
+}
+
+.scrollable.default-skin .scroll-bar.vertical {
+    width: 10px;
+}
+
+.scrollable.default-skin .scroll-bar.horizontal {
+    height: 10px;
+}
+
+.scrollable.default-skin .scroll-bar .thumb {
+    background-color: #BCD0F1;
+    border-radius: 3px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    cursor: pointer;
+}
+
+.scrollable.default-skin .scroll-bar:hover .thumb {
+    background-color: #85A8E6;
+}
+
+.scrollable.default-skin .scroll-bar.vertical {
+    width: 8px
+}
+
+.scrollable.default-skin .scroll-bar.horizontal {
+    height: 8px
+}
+
+.scrollable.default-skin .scroll-bar .thumb {
+    opacity: 1;
+    cursor: pointer;
+    background-color: #c0c5c8;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px
+}
+
+.scrollable.default-skin .scroll-bar:hover .thumb {
+    opacity: 1;
+    background-color: #6c6e70
+}
+
+.scrollable.default-skin .scroll-bar.vertical {
+    width: 13px;
+    background: #DDD
+}
+
+.scrollable.default-skin .scroll-bar .thumb {
+    width: 70%;
+    margin-left: 1px;
+    background-color: #848484;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px
+}
+
+.scrollable.default-skin .scroll-bar:hover .thumb {
+    background-color: #585858
+}

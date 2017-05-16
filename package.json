@@ -1,0 +1,39 @@
+{
+    "name": "default",
+    "version": "1.0.0",
+    "description": "develop fis3 pro ",
+    "main": "index.js",
+    "scripts": {
+        "watch": "rimraf ./dev && fis3 release -d ./dev  -wL",
+        "dev": "fis3 server start --type node",
+        "build": "fis3 release prod -cd ./dist -l"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fis-scaffold/default.git"
+    },
+    "keywords": [
+        "fis",
+        "scaffold"
+    ],
+    "author": "lizhang",
+    "license": "mit",
+    "bugs": {
+        "url": "https://github.com/fis-scaffold/default/issues"
+    },
+    "homepage": "https://github.com/fis-scaffold/default",
+    "dependencies": {
+        "browserify": "^6.2.0",
+        "fis-parser-less": "^0.1.3",
+        "fis-parser-utc": "^0.0.2",
+        "fis3-hook-amd": "^0.2.0",
+        "fis3-hook-commonjs": "^0.1.26",
+        "fis3-hook-node_modules": "^2.2.8",
+        "fis3-parser-browserify": "^0.1.6",
+        "fis3-parser-webpack": "^0.0.5",
+        "fis3-postpackager-autoloader": "^1.0.2",
+        "fis3-postpackager-loader": "^2.1.4",
+        "fis3-postpackager-simple": "^0.0.27",
+        "watchify": "^3.6.1"
+    }
+}
