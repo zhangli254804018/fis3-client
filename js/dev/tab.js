@@ -1,12 +1,13 @@
 var SINGER_CONFIG = require('../api/config.js');
+var RCanchor = require('./anchor.js');
 var RCgame = require('./game.js');
 var RCteam = require('./team.js');
 var conf = window.serverConfig;
 var RCtabData = Backbone.Model.extend({
     defaults: {
         tab: {
-            loaded: ['anchor'], //'game', 'team'
-            current: 'anchor'
+            loaded: [], //'game', 'team'
+            current: ''
         }
     },
     parse: function(res) {
@@ -18,7 +19,7 @@ var RCtabData = Backbone.Model.extend({
     },
     //類似初始化的加載函數
     initialize: function() {
-        this.on('change', this.tabChange)
+        this.on('change', this.tabChange);
     },
     //格式化數據
     tabChange: function() {
@@ -33,8 +34,14 @@ var RCtabcview = Backbone.View.extend({
     id: 'rc-tab',
     className: 'rc-tab clearfix',
     initialize: function() {
+        var _shuffle = _.sample(['game', 'team', 'anchor']);
+        var _path = [];
+        var _tab = this.model.get('tab');
+        var modelJson = this.model.tabChange()['tab'];
+        _tab.current = _shuffle;
+        this.initTab(modelJson.current, modelJson);
         this.listenTo(this.model, 'change', this.render);
-        this.render();
+        this.model.set(_tab);
     },
     events: {
         'click #rc-tab a.link-tab': 'clickTab'
@@ -46,11 +53,8 @@ var RCtabcview = Backbone.View.extend({
         this.delegateEvents();
         return this;
     },
-    clickTab: function(e) {
-        var vm = $(e.currentTarget);
-        var tab = vm.data('tab');
-        var tabData = this.model.get('tab');
-        // vm.addClass('active').siblings().removeClass('active');
+    initTab: function(tab, tabData) {
+        if (!tab) return;
         var lastIndexFind = _.findLastIndex(tabData.loaded, function(item) {
             return item === tab
         });
@@ -69,9 +73,15 @@ var RCtabcview = Backbone.View.extend({
             } else if (tab == 'team') {
                 var rcteam = new RCteam.View({
                     model: new RCteam.Model()
-                })
+                });
                 $('#rc-content-team').html(rcteam.el);
                 $('#rc-content-team').showLoading();
+            } else if (tab == 'anchor') {
+                $('#rc-content-anchor').html($.rcanchor.el);
+                $('#rc-content-anchor').showLoading();
+                _.delay(function() {
+                    $('#rc-content-anchor').showLoading('hide');
+                }, 300);
             }
             tabData.loaded.push(tab);
             $.extend(param, {
@@ -79,10 +89,18 @@ var RCtabcview = Backbone.View.extend({
             })
         };
         $('#rc-content-' + tab).removeClass('hide').siblings().addClass('hide');
-        $(window).trigger('resize');
         this.model.set({
             tab: param
         });
+        $.initImagesLazyLoad('.rc-rec');
+    },
+    clickTab: function(e) {
+        var vm = $(e.currentTarget);
+        var tab = vm.data('tab');
+        var tabData = this.model.get('tab');
+        // vm.addClass('active').siblings().removeClass('active');
+        this.initTab(tab, tabData);
+        window.customScrollbarAppend();
     }
 });
 

@@ -45,8 +45,11 @@ var RCteamData = Backbone.Model.extend({
         var teamList = this.get('teamList');
         var page = this.get('page');
         var pageLen = page.current ? page.len * (page.current) : 20;
+        var teamListN = _.chain(teamList).filter(function(item) {
+            return (item.onlines >= 10)
+        }).value();
         return {
-            teamList: teamList.slice(0, pageLen),
+            teamList: teamListN.slice(0, pageLen),
             page: page
         }
     }
@@ -55,7 +58,7 @@ var RCteamData = Backbone.Model.extend({
 var RCteamview = Backbone.View.extend({
     tagName: 'div',
     id: 'rc-rec',
-    className: 'rc-rec singer-rec game-rec',
+    className: 'rc-rec singer-rec team-rec',
     initialize: function() {
         this.btnLoad = false;
         this.fetch();
@@ -63,16 +66,18 @@ var RCteamview = Backbone.View.extend({
         // this.render();
     },
     events: {
-        'click #rc-content-team a.link-rec': 'clickRec',
-        'click #rc-content-team a.go-more': 'clickMore',
-        'hover #rc-content-team a.link-rec': 'hoverRec'
+        'click #rc-content-team ul>li a.link-rec': 'clickRec',
+        'click #rc-content-team a.go-more': 'clickMore'
     },
     render: function() {
         var modelJson = this.model.gameChange();
         this.template = _.template($('#tpl_team').html());
         this.$el.html(this.template(modelJson));
         this.delegateEvents();
-        $(window).trigger('resize');
+        $('body').customScrollbar('scrollToY', 0);
+        if (!this.btnLoad) $(window).trigger('resize');
+        this.btnLoad = true;
+        $.initImagesLazyLoad(this.$el.find('.link-rec'));
         return this;
     },
     fetch: function() {
@@ -92,11 +97,14 @@ var RCteamview = Backbone.View.extend({
     },
     clickRec: function(e) {
         var vm = $(e.currentTarget);
-        vm.parent().addClass('active').siblings().removeClass('active');
+        var sid = vm.data('sid');
+        try {
+            external.enterServer(sid, 0, 6);
+        } catch (error) {}
     },
     clickMore: function(e) {
-        if (this.btnLoad) return
-        this.btnLoad = true;
+        // if (this.btnLoad) return
+        // this.btnLoad = true;
         var vm = $(e.currentTarget);
         var currentPage = vm.data('current');
         currentPage++;
@@ -108,11 +116,11 @@ var RCteamview = Backbone.View.extend({
         $.when(this.model.set({
             teamList: teamList,
             page: param
-        })).then(this.fetch()).done(this.btnLoad = false);
+        })).then(this.fetch());
     },
     hoverRec: function(e) {
         var vm = $(e.currentTarget);
-        $(vm).children().children('h3').adOverflow();
+        //$(vm).children().children('h3').adOverflow();
         // e.stopPropagation();
     }
 });

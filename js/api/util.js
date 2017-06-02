@@ -56,6 +56,11 @@
             }
             return timeFormt;
         },
+        formatNum: function(listS, listL, num) {
+            if (!listS || !listL) return null;
+            num = num ? num : 5;
+            return listL.slice(0, Math.ceil(listS.length / num) * num)
+        },
         //延遲請求執行事件 delayBounce(callback,500)
         delayBounce: function(action, idle) {
             function delayBounces() {
@@ -274,6 +279,7 @@
         substrLen: function(str, len) {
             return (str && str.length > len) ? str.substr(0, len ? len : str.length) + "……" : str
         },
+        //滾動
         Slider: function(container, options) {
             /*
             options = {
@@ -425,29 +431,51 @@
             }
             new slider(options, container)
         },
-        pageFormat: function(item, list, total) {
-            var len = item.len ? item.len : 5;
-            var current = item.current ? item.current : 1;
-            var total = total ? total : Math.ceil(list.length / item.len);
-            var maxPage = (total - current) >= 5 ? 3 : (total - current);
-            var pathPage = [];
-            if (maxPage >= 3 && (current - 2) > 0) {
-                for (var i = current - 2; i < maxPage + current; i++) {
-                    pathPage.push(i)
+        //分類
+        kindFormat: function(kind, list) {
+            var listExend = _.union([], [{
+                    'type': 0,
+                    'name': '遊戲',
+                    'class': 'game'
+                },
+                {
+                    'type': 1,
+                    'name': '娛樂',
+                    'class': 'disport'
+                },
+                {
+                    'type': 2,
+                    'name': '綜合',
+                    'class': 'multiple'
                 }
-            } else if (maxPage >= 0) {
-                for (var i = current; i <= maxPage + current; i++) {
-                    pathPage.push(i)
-                }
-            }
-            return {
-                len: len,
-                total: total,
-                list: pathPage,
-                current: current
-            }
+            ]);
+            var findLastIndex = _.findLastIndex(listExend, function(item) {
+                return item.type === kind
+            });
+            return (findLastIndex !== -1) ? listExend[findLastIndex] : '綜合'
+        },
+        //過濾出全部的數組列表1-1
+        userListFormat: function(userList) {
+            var _path = [];
+            var sess_musicList = _.each(userList.sess_music, function(item) {
+                item.status = 'sess_music';
+            });
+            var sess_gameList = _.each(userList.sess_game, function(item) {
+                item.status = 'sess_game';
+            });
+            var sess_showList = _.each(userList.sess_show, function(item) {
+                item.status = 'sess_show';
+            });
+            var top_banners_showList = _.each(userList.top_banners_show, function(item) {
+                item.status = 'top_banners_show';
+            });
+            var top_banners_gameList = _.each(userList.top_banners_game, function(item) {
+                item.status = 'top_banners_game';
+            });
+            var userAllList = _.union(sess_musicList, sess_gameList, sess_showList, top_banners_showList, top_banners_gameList);
+            return _.isArray(userAllList) ? userAllList : _.toArray(userAllList);
         }
-    })
+    });
 
     //擴展jq的fn方法
     $.fn.extend({
@@ -505,7 +533,7 @@
         //展示loading
         showLoading: function(mode) {
             var self = this;
-            var $loading = $('<div class="no-data tc">加載中</div>');
+            var $loading = $('<div class="no-data tc">加載中···</div>');
             var $top = $(self).height() > 200 ? true : false;
             var $style = {
                 position: 'absolute',
@@ -515,7 +543,7 @@
                 bottom: '20px',
                 margin: '40% auto',
                 height: '40px',
-                width: '50px'
+                width: '200px'
             };
             var mode = mode ? mode : 'show';
             $(self).css({ position: 'relative' });
@@ -599,7 +627,7 @@
                 _hidden();
             });
         }
-    })
+    });
 
     //定義全局ga統計代碼
     window._ga = function() {

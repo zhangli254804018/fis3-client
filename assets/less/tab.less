@@ -1,41 +1,82 @@
 #rc-tab {
-    margin: 0px 0 0 0;
+    margin: 0px 0 0 0; // background: @RCtab;
+    background: url('@{img-url}ic_tab_hover.png') 0 top repeat-x; // margin-bottom: 8px;
+    ul {
+        width: 800px;
+        li {
+            float: left;
+        }
+    }
     a.link-tab {
-        float: left;
-        display: block;
-        width: 266px;
+        display: block; // width: 266px;
+        width: 800/3px-0.1;
         text-align: center;
-        background: @RCgrey;
-        padding: 9px 0;
+        height: 36px;
+        line-height: 36px; // background: @RCgrey;
+        // padding: 6.5px 0;
+        // border-top: 1px solid #e3e3e3;
+        // border-bottom: 1px solid #e3e3e3;
         span {
             padding: 9px 0;
-            color: @RCgreyf;
-            font-size: @font-16;
+            color: @RCgreyh;
+            font-size: @font-15;
         }
         &.icon-game {
-            margin: 0 1px;
-        }
-        // &:hover,
-        &.active {
-            background: @RCgreyl;
-            // .transition(300ms);
+            // margin: 0 1px;
+        } // &:hover,
+        &:hover {
+            // border-top: 1px solid @RCtabHover;
+            // border-bottom: 1px solid @RCtabHover;
+            // background: @RCtabHover;
+            background: url('@{img-url}ic_tab_hover.png')0 -36px repeat-x;
             span {
                 color: @RCwhite;
             }
             &.icon-normal {
                 span {
-                    background: url('@{img-url}ic_singer_click.png') 0 center no-repeat;
+                    background: url('@{img-url}ic_singer_click.png') 0 bottom no-repeat;
                 }
                 &.icon-game {
                     span {
                         .icon-tab();
-                        background: url('@{img-url}ic_game_click.png') 0 center no-repeat;
+                        background: url('@{img-url}ic_game_click.png') 0 bottom no-repeat;
                     }
                 }
                 &.icon-team {
                     span {
                         .icon-tab();
-                        background: url('@{img-url}ic_team_click.png') 0 center no-repeat;
+                        background: url('@{img-url}ic_team_click.png') 0 bottom no-repeat;
+                    }
+                }
+            }
+        }
+        &.active {
+            // border-top: 1px solid #686765;
+            // border-bottom: 1px solid #51504f;
+            // background: #686765;
+            // .gradient(#686765,
+            // #51504f);
+            background: url('@{img-url}ic_tab_hover.png') 0 bottom repeat-x;
+            &:hover {
+                background: url('@{img-url}ic_tab_hover.png') 0 -36*2px repeat-x;
+            }
+            span {
+                color: @RCwhite;
+            }
+            &.icon-normal {
+                span {
+                    background: url('@{img-url}ic_singer_click.png') 0 bottom no-repeat;
+                }
+                &.icon-game {
+                    span {
+                        .icon-tab();
+                        background: url('@{img-url}ic_game_click.png') 0 bottom no-repeat;
+                    }
+                }
+                &.icon-team {
+                    span {
+                        .icon-tab();
+                        background: url('@{img-url}ic_team_click.png') 0 bottom no-repeat;
                     }
                 }
             }
@@ -47,20 +88,20 @@
             &.icon-game {
                 span {
                     .icon-tab();
-                    background: url('@{img-url}ic_game_nomal.png') 0 center no-repeat;
+                    background: url('@{img-url}ic_game_click.png') 0 top no-repeat;
                 }
             }
             &.icon-team {
                 span {
                     .icon-tab();
-                    background: url('@{img-url}ic_team_nomal.png') 0 center no-repeat;
+                    background: url('@{img-url}ic_team_click.png') 0 top no-repeat;
                 }
             }
         }
-        &.hot{
-            span{
+        &.hot {
+            span {
                 position: relative;
-                &:after{
+                &:after {
                     content: '';
                     display: block;
                     position: absolute;

@@ -28,15 +28,6 @@ var RCgameData = Backbone.Model.extend({
     },
     //類似初始化的加載函數
     initialize: function() {
-        // this.url = $.addCallbackParam(SINGER_CONFIG.PATH.GET_GAME + '?type=0&size=20&page=1');
-        // this.fetch({
-        //     success: function() {
-        //         $('#rc-content-game').showLoading('hide');
-        //     },
-        //     error: function() {
-        //         $('#rc-content-game').showLoading('hide');
-        //     }
-        // });
         this.on('change', this.gameChange);
     },
     //格式化數據
@@ -72,15 +63,19 @@ var RCgameview = Backbone.View.extend({
         // this.render();
     },
     events: {
-        'click #rc-content-game a.link-rec': 'clickRec',
-        'click #rc-content-game a.go-more': 'clickMore'
+        'click #rc-content-game ul>li a.link-rec': 'clickRec',
+        'click #rc-content-game a.go-more': 'clickMore',
+        'mouseout #rc-content-game ul>li a.link-rec': 'clickRecOut'
     },
     render: function() {
         var modelJson = this.model.gameChange();
         this.template = _.template($('#tpl_game').html());
         this.$el.html(this.template(modelJson));
         this.delegateEvents();
-        $(window).trigger('resize');
+        $('body').customScrollbar('scrollToY', 0);
+        if (!this.btnLoad) $(window).trigger('resize');
+        this.btnLoad = true;
+        $.initImagesLazyLoad(this.$el.find('.link-rec'));
         return this;
     },
     fetch: function() {
@@ -100,11 +95,23 @@ var RCgameview = Backbone.View.extend({
     },
     clickRec: function(e) {
         var vm = $(e.currentTarget);
-        vm.parent().addClass('active').siblings().removeClass('active');
+        var gametype = vm.data('gametype');
+        var playcode = vm.data('playcode');
+        if (gametype == 1) {
+            try {
+                window.external.startGamebox(playcode);
+            } catch (error) {}
+        } else {
+            location.href(playcode);
+        };
+    },
+    clickRecOut: function(e) {
+        var vm = $(e.currentTarget);
+        //vm.parent().removeClass('active');
     },
     clickMore: function(e) {
-        if (this.btnLoad) return
-        this.btnLoad = true;
+        // if (this.btnLoad) return
+        // this.btnLoad = true;
         var vm = $(e.currentTarget);
         var currentPage = vm.data('current');
         currentPage++
@@ -116,7 +123,7 @@ var RCgameview = Backbone.View.extend({
         $.when(this.model.set({
             gameList: gameList,
             page: param
-        })).then(this.fetch()).done(this.btnLoad = false);
+        })).then(this.fetch());
     }
 });
 
