@@ -86,22 +86,7 @@ fis.hook('node_modules', {
 //可选参数, 高级配置 
 
 fis.match('js/index.js', {
-    parser: fis.plugin('browserify', {
-        option: {
-            shims: { //设置垫片
-                // 'react': 'window.React',
-                // 'react-dom': 'window.ReactDOM',
-                // 'react-router': 'window.ReactRouter',
-                // 'antd': 'window.antd'
-            },
-            requires: [
-                // { path: 'jQuery', expose: 'jQuery' } //暴露内部模块 方便 外部js var $ = require('jQuery')
-            ],
-            // externals: ['react', 'reactDOM'], //申明外部模块, 不打包入app.js
-            // externalRequireName: 'req', // 外部引用模块方法名, 默认: require 设置为req后 require 外部模块:  var $ = req('jQuery');
-            // umd: 'app' // 默认undfined ,  设置名字后 .umd打包  单独引用的时候, 可以访问 window.app 
-        }
-    }),
+    parser: fis.plugin('browserify'),
     release: 'js/dist/bundle.js'
 });
 
@@ -111,3 +96,14 @@ fis.media('dev').match('*', {
     useSprite: false,
     optimizer: null
 });
+
+fis.match('*.{js,css,png,jpg,gif}', {
+    release: '$0',
+    url: '$0',
+    domain: '.',
+    // domain: '//192.168.50.197:8082/ads-tw/main_src/fis-init/fis-develop/dev'
+});
+
+// fis.media('prod').match('*.js', {
+//       domain: 'http://cdn.baidu.com/'
+//   });

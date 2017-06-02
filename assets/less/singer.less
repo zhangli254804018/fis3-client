@@ -1,12 +1,17 @@
 #rc-rec {
+    // min-height: 400px;
+    background: @RCwhite;
+    // border: 1px solid #e3e3e3;
     &.singer-rec {
-        padding: 0 0 10px 0;
+        padding: 0 0 10px 0; // animation-name: opacity;
+        // animation-duration: .4s;
         ul>li {
             float: left;
-            width: 146px;
-            height: 195px; // padding: 10px 3px 0 10px;
-            margin: 7px;
+            width: 145px;
+            height: 198px; // padding: 10px 3px 0 10px;
+            margin: 6px;
             overflow: hidden;
+            border: 1px solid #e3e3e3;
             a.link-rec {
                 display: block;
                 margin: 0 0 2px 0;
@@ -14,11 +19,12 @@
                     .ic-mask {
                         position: absolute;
                         z-index: 99;
-                        &.mark-live{
-                            width: 46px;
-                            height: 16px;
+                        &.mark-live {
+                            width: 38px;
+                            height: 10px;
+                            margin: 6px 8px;
                         }
-                         &.mark-game{
+                        &.mark-game {
                             width: 32px;
                             height: 32px;
                         }
@@ -26,15 +32,16 @@
                     .mark-song {
                         display: block;
                         height: 20px;
-                        color: @RCyellow;
+                        color: @RCmusic;
                         font-size: @font-12;
                         background: url('@{live-url}ic_singer_voice_bg.png') no-repeat;
                         background-size: 100% 100%;
                         line-height: 20px;
                         padding: 1px 10px 1px 5px;
+                        margin: 2px 4px;
                         span.icon-singer-voice {
                             .icon-desc();
-                            color: @RCoriage;
+                            color: @RCmusic;
                             padding: 0 0 0 15px;
                             background: url('@{live-url}ic_singer_voice.gif') 0 center no-repeat;
                         }
@@ -59,7 +66,7 @@
                     img {
                         width: 100%;
                         max-width: 100%;
-                        &.img{
+                        &.img {
                             min-height: 146px;
                         }
                     }
@@ -77,11 +84,10 @@
             }
             .res-title {
                 height: 17px;
-                padding: 0 6px 8px 6px;
-                // width: 146px;
+                padding: 0 6px 8px 6px; // width: 146px;
                 h3 {
                     .nowrap();
-                    color: @RCwhite;
+                    color: @RCgreyt;
                 }
                 p {
                     .nowrap();
@@ -89,26 +95,25 @@
             }
             .res-title,
             .res-desc {
-                color: @RCgreyf;
+                color: @RCgreyt;
                 font-size: @font-12;
             }
             .res-desc {
                 margin: 0 6px 5px;
                 .desc-personl {
                     .icon-desc();
+                    padding: 0 0 0 14px;
                 }
                 .desc-position {
-                    .icon-desc();
-                    // padding: 0 0 0 13px;
+                    .icon-desc(); // padding: 0 0 0 13px;
                     background: url('@{img-url}ic_position.png') no-repeat;
                     span {
                         .nowrap();
                     }
                 }
                 .desc-id {
-                    .icon-desc();
-                    // padding: 0 0 0 13px;
-                    background: url('@{img-url}ic_ID.png') no-repeat;
+                    .icon-desc(); // padding: 0 0 0 13px;
+                    background: url('@{img-url}ic_ID.png') 0 center no-repeat;
                     span {
                         .nowrap();
                     }
@@ -125,16 +130,17 @@
                     }
                 }
             }
-            &.active {
-                border: 1px solid @RCyellow;
+            &.active,
+            &:hover {
                 margin: 6px;
+                border: 1px solid @RCyellow;
                 background: @RCgreyr;
                 a.link-rec {
                     .rec-mark {
                         .mark-video {
                             display: block;
                         }
-                        // .mark-live{
+                        ; // .mark-live{
                         //     display: none;
                         // }
                     }
@@ -157,6 +163,86 @@
                 display: block;
                 padding: 10px 20px;
                 font-size: 14px;
+            }
+        }
+        &.team-rec {
+            ul>li {
+                width: 385px;
+                height: auto;
+                overflow: hidden;
+            }
+            .link-item {
+                // width: 388px;
+                position: relative;
+                height: 100px;
+                overflow: hidden;
+                float: left;
+                padding: 8px;
+                cursor: pointer; // box-shadow: 0px 2px 1px rgba(0,0,0,.15)
+                .avater {
+                    width: 98px;
+                    height: 98px;
+                    display: inline-block;
+                    vertical-align: top;
+                    img {
+                        width: 98px;
+                        height: 98px;
+                    }
+                }
+                .desc {
+                    padding: 10px;
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 250px;
+                    h3 {
+                        font-size: 13px;
+                        color: #333;
+                    }
+                    p {
+                        font-size: 12px;
+                        color: #888;
+                        line-height: 150%;
+                        height: 42px;
+                        margin-top: 7px;
+                    }
+                    .res-desc {
+                        width: 260px;
+                        margin: 0;
+                        label {
+                            font-size: 12px;
+                            display: block;
+                            float: left;
+                            color: #333;
+                            &.last {
+                                margin-left: 13px;
+                                float: left;
+                            }
+                        }
+                    }
+                }
+                .tips {
+                    position: absolute;
+                    top: 0;
+                    right: 6px;
+                    font-size: @font-12;
+                    span {
+                        padding: 3px 9px;
+                        border-bottom-left-radius: 3px;
+                        border-bottom-right-radius: 3px;
+                        &.disport {
+                            background: @RCorigerl;
+                            color: @RCoriger;
+                        }
+                        &.game {
+                            background: @RCgreenl;
+                            color: @RCgreen;
+                        }
+                        &.multiple{
+                            background: @RCbluel;
+                            color: @RCblue;
+                        }
+                    }
+                }
             }
         }
     }

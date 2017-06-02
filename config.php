@@ -42,7 +42,8 @@ $rc_live = "//rcshow.tv/index.php?c=newHome&a=topFlashList";
 $rc_swf = "assets/swf/HomeShow.swf";
 $rc_express = "assets/swf/expressInstall.swf";
 $rc_assets = "assets/";
-$rc_adurl = "//rcshow.tv/activity/musicLive/";
+$rc_static = "./";
+$rc_adurl = "";
 $rc_adtitle = "音樂達人LIVE秀";
 
 $config = array(
@@ -54,6 +55,8 @@ $config = array(
     "rc_swf"  =>$rc_swf,
     "rc_express"=>$rc_express,
     "rc_assets"=>$rc_assets,
+    //  "start_time" => round(microtime(true)*1000),
+    // "start_time" => round(time()*1000),
     // "sess_music" => $sess_music,
     // "sess_game" =>$sess_game,
     // "sess_show" => $sess_show,

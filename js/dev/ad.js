@@ -44,6 +44,7 @@ var RCadviewFl = Backbone.View.extend({
     },
     render: function() {
         var modelJson = this.model.adChange()['ad'];
+        if (!modelJson.url) return;
         var self = this;
         var img = new Image();
         img.src = modelJson.img;
@@ -51,7 +52,7 @@ var RCadviewFl = Backbone.View.extend({
             self.$el.adSize('#rc-banner');
         };
         this.template = _.template($('#tpl_ad').html());
-        this.$el.html(this.template(modelJson));
+        this.$el.html(this.template(modelJson)).hide();
         this.delegateEvents();
         return this;
     },
@@ -73,6 +74,7 @@ var RCadviewFr = Backbone.View.extend({
     },
     render: function() {
         var modelJson = this.model.adChange()['ad'];
+        if (!modelJson.url) return;
         var self = this;
         var img = new Image();
         img.src = modelJson.img;
@@ -80,7 +82,7 @@ var RCadviewFr = Backbone.View.extend({
             self.$el.adSize('#rc-banner');
         };
         this.template = _.template($('#tpl_ad').html());
-        this.$el.html(this.template(modelJson));
+        this.$el.html(this.template(modelJson)).hide();
         this.delegateEvents();
         return this;
     },

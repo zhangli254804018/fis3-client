@@ -27,8 +27,8 @@ var RCancData = Backbone.Model.extend({
     //類似初始化的加載函數
     initialize: function() {
         this.url = $.addCallbackParam(SINGER_CONFIG.PATH.GET_SHOW + '?type=0&size=20&page=1');
-        this.fetch();
-        this.on('change', this.anChange)
+        // this.fetch();
+        this.on('change', this.anChange);
     },
     //格式化數據
     anChange: function() {
@@ -41,18 +41,23 @@ var RCancData = Backbone.Model.extend({
             return !item.lvNum
         }).sortBy(function(item) {
             return !item.label
-        }).value().concat(_.chain(anchorList).filter(function(item) {
+        }).value();
+        var anchorListN = anchorListF.concat(_.chain(anchorList).filter(function(item) {
             return !item.live
         }).sortBy(function(item) {
-            return !item.lvNum
+            return !item.lvNum && !item.online
         }).value());
-        var anchorListM = _.chain(anchorList).filter(function(item) {
+        var anchorListM = conf.anchorListM = _.chain(anchorList).filter(function(item) {
             if (item.live) item.link_type = 3;
-            return !item.cate && item.live
-        }).sample().value();
+            return !item.cate && item.live == 1 && !item.label
+        }).sortBy(function(item) {
+            return -item.weight
+        }).filter(function(item) {
+            return item.weight >= 50
+        }).first().value();
         return {
             anclistrm: anchorListM,
-            anclist: anchorListF.slice(0, pageLen),
+            anclist: anchorListF.length >= 15 ? $.formatNum(anchorListF, anchorListN) : anchorListN.slice(0, pageLen),
             page: page
         }
     }
@@ -61,28 +66,44 @@ var RCancData = Backbone.Model.extend({
 var RCancview = Backbone.View.extend({
     tagName: 'div',
     id: 'rc-rec',
-    className: 'rc-rec singer-rec',
+    className: 'rc-rec singer-rec singers-rec',
     initialize: function() {
         this.btnLoad = false;
         this.listenTo(this.model, 'change', this.render);
-        this.render();
+        this.model.fetch();
     },
     events: {
-        'hover #rc-rec ul>li a.link-rec': 'clickRec',
+        'click #rc-rec ul>li a.link-rec': 'clickRec',
         'click #rc-rec a.go-more': 'clickMore',
-        'hover #rc-rec a.link-rec': 'hoverRec'
+        'mouseout #rc-rec ul>li a.link-rec': 'clickRecOut'
     },
     render: function() {
         var modelJson = this.model.anChange();
         this.template = _.template($('#tpl_anchor').html());
         this.$el.html(this.template(modelJson));
         this.delegateEvents();
+        $.initImagesLazyLoad(this.$el.find('.link-rec'));
         $(window).trigger('resize');
         return this;
     },
     clickRec: function(e) {
         var vm = $(e.currentTarget);
-        vm.parent().addClass('active').siblings().removeClass('active');
+        var live = vm.data('live');
+        var cid = vm.data('cid');
+        var uid = vm.data('uid');
+        var sid = vm.data('sid');
+        //vm.parent().addClass('active').siblings().removeClass('active');
+        if (live == 1) {
+            try {
+                external.enterServer(sid, cid, 6);
+            } catch (error) {}
+        } else {
+            window.open('//rcshow.tv/live/?uid=' + uid);
+        }
+    },
+    clickRecOut: function(e) {
+        var vm = $(e.currentTarget);
+        //vm.parent().removeClass('active');
     },
     clickMore: function(e) {
         if (this.btnLoad) return
@@ -102,7 +123,7 @@ var RCancview = Backbone.View.extend({
     },
     hoverRec: function(e) {
         var vm = $(e.currentTarget);
-        $(vm).children().children('h3').adOverflow();
+        //$(vm).children().children('h3').adOverflow();
         // e.stopPropagation();
     }
 });
