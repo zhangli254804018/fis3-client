@@ -99,8 +99,15 @@ fis.media('dev').match('*', {
 
 fis.match('*.{js,css,png,jpg,gif}', {
     release: '$0',
-    url: '$0',
-    domain: '.',
+    url: '.$0',
+    // domain: '.',
+    // domain: '//192.168.50.197:8082/ads-tw/main_src/fis-init/fis-develop/dev'
+});
+
+fis.match('*.{png,jpg,gif}', {
+    release: '$0',
+    url: '../..$0',
+    // domain: '.',
     // domain: '//192.168.50.197:8082/ads-tw/main_src/fis-init/fis-develop/dev'
 });
 

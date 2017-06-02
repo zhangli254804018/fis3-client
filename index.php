@@ -509,9 +509,9 @@
     }
 </script>
 <?php if ($debug) {?>
-<script type="text/javascript" src="js/dist/bundle.js?v=<?php echo $v; ?>"></script>
+<script type="text/javascript" src="<?php echo $rc_static; ?>js/dist/bundle.js?v=<?php echo $v; ?>"></script>
 <?php } else {?>
-<script type="text/javascript" src="js/dist/bundle.min.js?v=<?php echo $v; ?>"></script>
+<script type="text/javascript" src="<?php echo $rc_static; ?>js/dist/bundle.min.js?v=<?php echo $v; ?>"></script>
 <?php }?>
 <script>
     (function(i, s, o, g, r, a, m) {
