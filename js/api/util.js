@@ -635,4 +635,49 @@
             ga.apply(window, Array.prototype.slice.call(arguments, 0));
         }
     };
+    //定義全局RC統計代碼
+    //_ga('send', 'event', 'showuser', 'click', '左側tab主播視頻','uid');
+    //_rc('page_version', 'event_type', 'uid');
+    //http://ads.raidtalk.com.tw/main_statics/{page_version}/{event_type}/{uid}.png?r={radom}
+    //  event_type：
+    // 前端触发进频道事件（新首页）
+    // 1.视频区点击“进入直播间”
+    // promote_channel_enter
+    // 2.主播推荐tab下的内容点击
+    // recommended_artist_enter
+    // 3.推荐群tab下的内容点击
+    // recommend_sess_enter
+
+    // 前端进群事件（旧首页）
+    // 1.主播推荐下的内容点击
+    // recommended_artist_enter
+    // 2.娱乐社区下的内容点击
+    // recommend_sess_enter
+    // 3.活动好康下“今日活动”下的内容点击
+    // recommend_event_enter
+    // 搜索主播昵称进群
+    // search_artist_enter
+    window._rc = function() {
+        var rc = function() {
+            var args = arguments;
+            var params = ''; //page_version+'/'+event_type+'/'+uid
+            var url = '';
+            var img = new Image();
+            try {
+                var param = $.extend({}, {
+                    a: _.now(),
+                    dl: location.href,
+                    page_version: args[0],
+                    event_type: args[1],
+                    uid: args[2]
+                })
+                params = param.page_version + '/' + param.event_type + '/' + param.uid;
+                url = 'http://ads.raidtalk.com.tw/main_statics/' + params + '.png';
+                img.src = $.addMathroundParam(url);
+            } catch (error) {};
+        };
+        if (typeof rc == 'function') {
+            rc.apply(window, Array.prototype.slice.call(arguments, 0));
+        }
+    };
 })(window.jQuery);

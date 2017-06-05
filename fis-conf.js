@@ -85,7 +85,6 @@ fis.hook('node_modules', {
 
 //可选参数, 高级配置
 fis.match('js/index.js', {
-    isMod: true,
     parser: fis.plugin('browserify'),
     release: 'js/dist/bundle$1'
 });

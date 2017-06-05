@@ -46,6 +46,7 @@ var RCteamData = Backbone.Model.extend({
         var page = this.get('page');
         var pageLen = page.current ? page.len * (page.current) : 20;
         var teamListN = _.chain(teamList).filter(function(item) {
+
             return (item.onlines >= 10)
         }).value();
         return {

@@ -4,7 +4,7 @@
     "description": "develop fis3 pro ",
     "main": "index.js",
     "scripts": {
-        "watch": "rimraf dev && fis3 release -d ./dev  -wL",
+        "watch": "rimraf dev && fis3 release -d ./dev  -cwL",
         "dev": "fis3 server start --type node",
         "pro": "rimraf dist && fis3 release prod -cd dist -l"
     },

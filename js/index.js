@@ -59,7 +59,7 @@ window.customScrollbar = function(toTop) {
             updateOnWindowResize: true,
             animationSpeed: 500,
             onCustomScroll: function(event, scrollData) {
-                $.initImagesLazyLoad(elemContainer.find('.rc-content').add('#rc-banner'));
+                $.initImagesLazyLoad(elemContainer);
             }
         });
         $('div.thumb', elemContainer).mousedown(function() {

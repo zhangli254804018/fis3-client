@@ -154,13 +154,19 @@ var RCbanFLview = Backbone.View.extend({
     tagName: 'div',
     className: 'ban-fl',
     initialize: function() {
-        this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model, 'change:bannerSet', this.render);
+        // this.loaded = false;
     },
     events: {
         'click #banfLTpl .slides a.link-banner': 'ClickBanner'
     },
     render: function() {
         var modelJosn = this.model.banChange();
+        // if (this.loaded && _.has(modelJosn, 'bannerSet')) {
+        //     $.each(modelJosn.bannerSet, function(index, item) {
+        //         item.loaded = true;
+        //     })
+        // };
         this.template = _.template($('#tpl_banfL').html())
         this.$el.html(this.template(modelJosn));
         this.delegateEvents();
@@ -172,6 +178,20 @@ var RCbanFLview = Backbone.View.extend({
         $.initImagesLazyLoad(this.$el, {
             timeout: 1000
         });
+        $.delayBounce(function() {
+            _.delay(function() {
+                var bannerLiveKey = modelJosn.bannerSet;
+                $.each(bannerLiveKey, function(index, item) {
+                    item.loaded = true
+                });
+                var param = $.extend({}, modelJosn, {
+                    bannerSet: bannerLiveKey
+                });
+                self.model.set(param);
+            }, 500);
+        }, 500)
+
+        // if (!this.loaded) this.loaded = true;
         return this;
     },
     ClickBanner: function(e) {
@@ -256,14 +276,14 @@ var RCbanFRview = Backbone.View.extend({
                 var index = vm.hasClass('link-banner') ? $(e.currentTarget).parents('li').data('index') : vm.index();
                 self.ClickBLink(index);
             });
-            $.initImagesLazyLoad(self.$el, {
-                timeout: 100
-            });
-        }, 500);
-        $.delayBounce(function() {
-            //獲取初始化隨機的播放右側tab
-            var findBannerIndex = self.secBanner();
-            self.ClickSlider('', '[data-keys=' + findBannerIndex['status'] + ']');
+            $.delayBounce(function() {
+                //獲取初始化隨機的播放右側tab
+                var findBannerIndex = self.secBanner();
+                self.ClickSlider('', '[data-keys=' + findBannerIndex['status'] + ']');
+                $.initImagesLazyLoad(self.$el, {
+                    timeout: 100
+                });
+            }, 500)
         }, 500);
         return this;
     },
@@ -273,7 +293,7 @@ var RCbanFRview = Backbone.View.extend({
     ClickBanner: function(e, _this) {
         if (e) e.stopPropagation();
         var vm = e ? $(e.currentTarget) : $(_this);
-        $.initImagesLazyLoad(vm.add($('#banfLTpl')), {
+        $.initImagesLazyLoad(this.$el, {
             timeout: 50
         });
     },
@@ -286,8 +306,10 @@ var RCbanFRview = Backbone.View.extend({
         var param = $.extend({}, { banner: dataList, bannerSet: dataSet });
         var index = vm.find('.has-dots').attr('data-index');
         var _index = 0;
+        var self = this;
+        var bannerLiveKey;
         if (_.has(dataList, key)) {
-            var dataKey = dataList[key];
+            var dataKey = bannerLiveKey = dataList[key];
             var bannerLive = _.chain(dataKey).filter(function(item) {
                 return item.live && item.link_type == 3
             }).sample().value();
@@ -295,25 +317,25 @@ var RCbanFRview = Backbone.View.extend({
                 return item === bannerLive
             });
             param = $.extend({}, param, {
-                bannerSet: dataList[key],
+                bannerSet: bannerLiveKey,
                 bannerLive: bannerLive ? bannerLive : {}
             });
         };
-        $.when(this.model.set(param)).then(this.livePlayer())
-            .then(this.ClickBanner(e, _this)).then(
-                vm.addClass('active').siblings().removeClass('active')
-            ).done(this.ClickBLink(index));
-        vm.siblings('.slider-live').find('.banner')._always(autuParam);
-        if (key.indexOf('sess_') > -1 && _.has(bannerLive, 'live')) {
-            _.delay(function() {
+
+        $.when(this.model.set(param)).then(this.ClickBanner(e, _this)).then(function() {
+            vm.siblings('.slider-live').find('.banner')._always(autuParam);
+            vm.addClass('active').siblings().removeClass('active');
+        }).then(function() {
+            self.ClickBLink(index);
+            if (key.indexOf('sess_') > -1 && _.has(bannerLive, 'live')) {
                 vm.find('.banner')._slide(autuParam, _index);
-            }, 500);
-        };
+            };
+        }).done(this.livePlayer());
     },
     livePlayer: function(e) {
         var bannerSet = this.model.banChange()['bannerSet'];
         var bannerLive = this.model.banChange()['bannerLive'];
-        var bannerPlayer = bannerLive ? bannerLive : bannerSet;
+        var bannerPlayer = bannerLive ? bannerLive : {};
         bannerPlayer.url_open = 1;
         this.live(bannerPlayer);
     },
@@ -330,6 +352,13 @@ var RCbanFRview = Backbone.View.extend({
         var tips = bannerPlayer.tips;
         var token = $.getQueryString('cookie');
         var url_open = bannerPlayer.url_open;
+        var param = {
+            page_version: 'index_830',
+            event_type: 'promote_channel_enter',
+            uid: conf.uid
+        };
+        var params = param.page_version + '/' + param.event_type + '/' + param.uid;
+        var collect_url = 'http://ads.raidtalk.com.tw/main_statics/' + params + '.png';
         var el = $('#myDynamicContent');
         var self = this;
         var linktypeFn = function() {
@@ -344,11 +373,12 @@ var RCbanFRview = Backbone.View.extend({
                     sid: sid,
                     rawSid: rawSid,
                     report_url: (report_url ? encodeURIComponent($.addMathroundParam(report_url)) : ''),
+                    collect_url: (collect_url ? encodeURIComponent($.addMathroundParam(collect_url)) : ''),
                     tips: tips,
                     time: 60 * 1000 * 1
                 };
                 swfobject.embedSWF(conf.rc_swf, 'myDynamicContent', "560", "420", "9.0.0", conf.rc_express, flashvars);
-                _ga('send', 'event', 'showuser', 'click', '左側tab主播視頻');
+                // _ga('send', 'event', 'showuser', 'click', '左側tab主播視頻');
             } else if (link_type == 1 && isNaN(url) && url_open == 0) {
                 window.open(url);
             } else if (isNaN(url) && link_type == 3 && url_open == 0) {

@@ -54,7 +54,7 @@ var RCancData = Backbone.Model.extend({
             return -item.weight
         }).filter(function(item) {
             return item.weight >= 50
-        }).first().value();
+        }).sample().value();
         return {
             anclistrm: anchorListM,
             anclist: anchorListF.length >= 15 ? $.formatNum(anchorListF, anchorListN) : anchorListN.slice(0, pageLen),
