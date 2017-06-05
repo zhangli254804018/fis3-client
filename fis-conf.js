@@ -62,7 +62,7 @@ fis.match('::package', {
     packager: fis.plugin('map', {
         'js/dist/vendor.min.js': [
             'lib/jquery.tools.min.js',
-            'lib/jquery.custom-scrollbar.js',
+            'lib/jquery.custom-scrollbar2.js',
             'lib/base64.js',
             'lib/underscore.js',
             'lib/backbone.js',
@@ -83,11 +83,23 @@ fis.hook('node_modules', {
     mergeLevel: 3
 });
 
-//可选参数, 高级配置 
-
+//可选参数, 高级配置
 fis.match('js/index.js', {
+    isMod: true,
     parser: fis.plugin('browserify'),
-    release: 'js/dist/bundle.js'
+    release: 'js/dist/bundle$1'
+});
+
+fis.match('*.{js,css,png,jpg,gif}', {
+    url: './$0',
+    //  release: '$0',
+    // domain: '.'
+});
+
+fis.match('*.{png,jpg,gif}', {
+    release: '$0',
+    url: '../..$0',
+    // domain: '.',
 });
 
 // 針對開發環節下fis配置
@@ -97,19 +109,16 @@ fis.media('dev').match('*', {
     optimizer: null
 });
 
-fis.match('*.{js,css,png,jpg,gif}', {
-    release: '$0',
-    url: '.$0',
-    // domain: '.',
-    // domain: '//192.168.50.197:8082/ads-tw/main_src/fis-init/fis-develop/dev'
-});
 
-fis.match('*.{png,jpg,gif}', {
-    release: '$0',
-    url: '../..$0',
-    // domain: '.',
-    // domain: '//192.168.50.197:8082/ads-tw/main_src/fis-init/fis-develop/dev'
-});
+// 針對開發環節下fis配置
+fis.media('prod').match('js/index.js', {
+    parser: fis.plugin('browserify'),
+    release: 'js/dist/bundle.min$1'
+}).match('*', {
+    useHash: false,
+    useSprite: true,
+    optimizer: fis.plugin('uglify-js')
+})
 
 // fis.media('prod').match('*.js', {
 //       domain: 'http://cdn.baidu.com/'
