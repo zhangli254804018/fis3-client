@@ -47,16 +47,27 @@ var RCancData = Backbone.Model.extend({
         }).sortBy(function(item) {
             return !item.lvNum && !item.online
         }).value());
-        var anchorListM = conf.anchorListM = _.chain(anchorList).filter(function(item) {
+        var uninlist = $.userListFormat(conf);
+        var anchorListM = _.chain(anchorList).filter(function(item) {
             if (item.live) item.link_type = 3;
             return !item.cate && item.live == 1 && !item.label
         }).sortBy(function(item) {
             return -item.weight
         }).filter(function(item) {
             return item.weight >= 50
-        }).sample().value();
+        }).value();
+        // .sample().value();
+        $.each(uninlist, function(index, item) {
+            var findLastIndex = _.findLastIndex(anchorListM, function(items) {
+                return items.rawSid == item.rawSid
+            });
+            if (findLastIndex !== -1) {
+                anchorListM.splice(findLastIndex, 1);
+            }
+        });
+        conf.anchorListM = _.sample(anchorListM);
         return {
-            anclistrm: anchorListM,
+            anclistrm: conf.anchorListM,
             anclist: anchorListF.length >= 15 ? $.formatNum(anchorListF, anchorListN) : anchorListN.slice(0, pageLen),
             page: page
         }

@@ -1,10 +1,10 @@
 <?php
     include "config.php";
+    
     // var_dump($data);
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -12,11 +12,11 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <?php if ($debug) {?>
-    <link rel="stylesheet" type="text/css" href="<?php echo $rc_static; ?>assets/css/main.css?v=<?php echo $v; ?>">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css?v=<?php echo $v; ?>">
     <?php } else {?>
-     <link rel="stylesheet" type="text/css" href="<?php echo $rc_static; ?>assets/css/main.min.css?v=<?php echo $v; ?>">
+     <link rel="stylesheet" type="text/css" href="assets/css/main.min.css?v=<?php echo $v; ?>">
     <?php }?>
-    <script type="text/javascript" src="<?php echo $rc_static; ?>js/dist/vendor.min.js"></script>
+    <script type="text/javascript" src="js/dist/vendor.min.js"></script>
     <!--<link rel="stylesheet" type="text/css" href="assets/css/vendor/scrollable.css">-->
     <!--<script type="text/javascript" src="lib/jquery.1.7.1.js"></script>
     <script type="text/javascript" src="lib/jquery.custom-scrollbar.js"></script>
@@ -508,11 +508,6 @@
         start_time: new Date().getTime()
     }
 </script>
-<?php if ($debug) {?>
-<script type="text/javascript" src="<?php echo $rc_static; ?>js/dist/bundle.js?v=<?php echo $v; ?>"></script>
-<?php } else {?>
-<script type="text/javascript" src="<?php echo $rc_static; ?>js/dist/bundle.min.js?v=<?php echo $v; ?>"></script>
-<?php }?>
 <script>
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
@@ -528,4 +523,9 @@
     // ga('create', 'UA-65869892-2', { userId: <?php echo $uid; ?>});
     ga('send', 'pageview');
 </script>
+<?php if ($debug) {?>
+<script type="text/javascript" src="js/dist/bundle.js?v=<?php echo $v; ?>"></script>
+<?php } else {?>
+<script type="text/javascript" src="js/dist/bundle.min.js?v=<?php echo $v; ?>"></script>
+<?php }?>
 </html>

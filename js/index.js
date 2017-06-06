@@ -7,7 +7,6 @@ var RCbanner = require('./dev/banner.js');
 var RCanchor = require('./dev/anchor.js');
 var RCtab = require('./dev/tab.js');
 var RCad = require('./dev/ad.js');
-
 /***************************設置路由 start ********************************************** */
 var RCWorkspace = Backbone.Router.extend({
     routes: {

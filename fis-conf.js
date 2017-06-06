@@ -26,14 +26,11 @@ fis.set('project.ignore', [
     '*.lock'
 ]);
 
-//壓縮less文件
-fis.match('assets/less/main.less', {
-    parser: fis.plugin('less'),
-    rExt: '.css',
-    isCssLike: true,
-    packTo: 'assets/css/main.css'
-});
-
+fis.config.set('modules.postpackager', 'simple');
+//开始autoCombine可以将零散资源进行自动打包
+fis.config.set('settings.postpackager.simple.autoCombine', true);
+//开启autoReflow使得在关闭autoCombine的情况下，依然会优化脚本与样式资源引用位置
+fis.config.set('settings.postpackager.simple.autoReflow', true);
 // packOrder
 // 解释：用来控制合并时的顺序，值越小越在前面。配合 packTo 一起使用。
 // 值类型：Integer
@@ -52,6 +49,14 @@ fis.config.set('settings.optimizer.uglify-js', {
     }
 });
 
+//壓縮less文件
+fis.match('assets/less/main.less', {
+    parser: fis.plugin('less'),
+    rExt: '.css',
+    isCssLike: true,
+    release: 'assets/css/main.css'
+});
+
 fis.match('lib/{*,**/*}.js', {
     isMod: false,
     optimizer: fis.plugin('uglify-js'),
@@ -68,7 +73,8 @@ fis.match('::package', {
             'lib/backbone.js',
             'lib/swfobject.js'
         ]
-    })
+    }),
+    spriter: fis.plugin('csssprites')
 })
 
 //壓縮所有的png圖片等
@@ -96,7 +102,7 @@ fis.match('*.{js,css,png,jpg,gif}', {
 });
 
 fis.match('*.{png,jpg,gif}', {
-    release: '$0',
+    // release: '$0',
     url: '../..$0',
     // domain: '.',
 });
@@ -113,11 +119,17 @@ fis.media('dev').match('*', {
 fis.media('prod').match('js/index.js', {
     parser: fis.plugin('browserify'),
     release: 'js/dist/bundle.min$1'
-}).match('*', {
-    useHash: false,
-    useSprite: true,
+}).match('assets/less/main.less', {
+    parser: fis.plugin('less'),
+    rExt: '.css',
+    isCssLike: true,
+    release: 'assets/css/main.min.css'
+}).match('*.js', {
     optimizer: fis.plugin('uglify-js')
-})
+}).match('*.{css,less}', {
+    useSprite: true,
+    optimizer: fis.plugin('clean-css')
+});
 
 // fis.media('prod').match('*.js', {
 //       domain: 'http://cdn.baidu.com/'

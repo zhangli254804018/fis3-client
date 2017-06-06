@@ -4,9 +4,9 @@
     "description": "develop fis3 pro ",
     "main": "index.js",
     "scripts": {
-        "watch": "rimraf dev && fis3 release -d ./dev  -cwL",
-        "dev": "fis3 server start --type node",
-        "pro": "rimraf dist && fis3 release prod -cd dist -l"
+        "dev": "rimraf dev && fis3 release -d ./dev  -cwL",
+        "start": "fis3 server start --type node",
+        "build": "rimraf dist && fis3 release prod -cd dist"
     },
     "repository": {
         "type": "git",
@@ -29,7 +29,6 @@
         "fis3-hook-commonjs": "^0.1.26",
         "fis3-hook-node_modules": "^2.2.8",
         "fis3-parser-browserify": "^0.1.6",
-        "fis3-parser-webpack": "^0.0.5",
         "fis3-postpackager-autoloader": "^1.0.2",
         "fis3-postpackager-loader": "^2.1.4",
         "fis3-postpackager-simple": "^0.0.27"

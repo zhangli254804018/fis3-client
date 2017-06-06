@@ -20,12 +20,7 @@ var RCbanData = Backbone.Model.extend({
             sess_game: {},
             sess_show: {},
             top_banners_show: [],
-            top_banners_game: [],
-            sess_index: {
-                game: 0,
-                show: 0,
-                music: 0
-            }
+            top_banners_game: []
         },
         bannerLive: {},
         bannerSet: undefined
@@ -47,15 +42,15 @@ var RCbanData = Backbone.Model.extend({
         var banner = this.get('banner');
         var bannerSet = this.get('bannerSet');
         var bannerLive = this.get('bannerLive');
-        var keys = _.keys(banner);
-        $.each(keys, function(index, item) {
-            if (!_.isArray(banner[item])) {
-                var path = [];
-                var items = banner[item];
-                path.push(items);
-                banner[item] = path;
-            }
-        });
+        // var keys = _.keys(banner);
+        // $.each(keys, function(index, item) {
+        //     if (!_.isArray(banner[item])) {
+        //         var path = [];
+        //         var items = banner[item];
+        //         path.push(items);
+        //         banner[item] = path;
+        //     }
+        // });
         var param = {};
         var showPath = [];
         var musicPath = [];
@@ -68,29 +63,11 @@ var RCbanData = Backbone.Model.extend({
             return item.status === 'sess_show'
         }).value();
         if (conf.anchorListM) {
-            var anclistrm = conf.anchorListM ? conf.anchorListM :
-                $.rcanchor.model.anChange().anclistrm;
+            var anclistrm = conf.anchorListM;
             $.extend(param, anclistrm)
         };
         //热门live出现：综艺那边后台没有上传有效时间内的bn时出现，此时展示热门live的bn（唯一）
         if (!sessshowList.length) {
-            // var paths = [];
-            // if (banner.sess_show.length > 0) {
-            //     var paramShow = $.extend({}, param);
-            //     var sampleShow = _.chain(banner.sess_show).sample().value();
-            //     $.extend(sampleShow ? sampleShow : banner.sess_show[0], paramShow);
-            //     paths.push(paramShow);
-            //     banners = $.extend({}, banner, {
-            //         sess_show: banner.sess_show
-            //     });
-            // } else {
-            //     var paramShow = $.extend({}, {
-            //         img: conf.rc_assets + 'img/ic_hot_rec.png'
-            //     }, param);
-            //     banners = $.extend({}, banner, {
-            //         sess_show: paramShow
-            //     });
-            // }
             var paramShow = $.extend({
                 img: conf.rc_assets + 'img/ic_hot_rec.png'
             }, param);
@@ -102,23 +79,6 @@ var RCbanData = Backbone.Model.extend({
         };
         //音乐房：只有一个规则，3个推荐位都没视频播时播“热门live”，综艺位播了热门live就不需要再在这边播了。播热门live时展示热门live的bn（固定唯一）
         if (!sessmusicList.length && !showPath.length && conf.anchorListM) {
-            // if (banner.sess_music.length > 0) {
-            //     var path = [];
-            //     var paramMusic = $.extend({}, param);
-            //     var sampleMusic = _.chain(banner.sess_show).sample().value();
-            //     $.extend(sampleMusic ? sampleMusic : banner.sess_music[0], paramMusic);
-            //     path.push(paramMusic);
-            //     banners = $.extend({}, banner, {
-            //         sess_music: banner.sess_music
-            //     });
-            // } else {
-            //     var paramMusic = $.extend({}, {
-            //         img: conf.rc_assets + 'img/ic_hot_rec.png'
-            //     }, param);
-            //     banners = $.extend({}, banner, {
-            //         sess_music: paramMusic
-            //     });
-            // }
             var paramMusic = $.extend({
                 img: conf.rc_assets + 'img/ic_hot_rec.png'
             }, param);
@@ -375,7 +335,7 @@ var RCbanFRview = Backbone.View.extend({
                     report_url: (report_url ? encodeURIComponent($.addMathroundParam(report_url)) : ''),
                     collect_url: (collect_url ? encodeURIComponent($.addMathroundParam(collect_url)) : ''),
                     tips: tips,
-                    time: 60 * 1000 * 1
+                    time: 15 * 1000 * 1
                 };
                 swfobject.embedSWF(conf.rc_swf, 'myDynamicContent', "560", "420", "9.0.0", conf.rc_express, flashvars);
                 // _ga('send', 'event', 'showuser', 'click', '左側tab主播視頻');
