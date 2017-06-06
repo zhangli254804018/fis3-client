@@ -2,7 +2,8 @@
 // 基本配置
 ///====================
 // 设置 NODE_ENV
-//development 环境 debug：true 
+//development 环境 debug：true
+/*eslint linebreak-style: ["error", "windows"]*/
 fis.once('compile:start', function(file) {
     if (fis.project.currentMedia() != "dev") {
         process.env.NODE_ENV = 'production';
@@ -97,13 +98,13 @@ fis.match('js/index.js', {
 
 fis.match('*.{js,css,png,jpg,gif}', {
     url: './$0',
-    //  release: '$0',
+    // release: '$0',
     // domain: '.'
 });
 
 fis.match('*.{png,jpg,gif}', {
-    // release: '$0',
     url: '../..$0',
+    // release: '$0',
     // domain: '.',
 });
 
@@ -114,7 +115,6 @@ fis.media('dev').match('*', {
     optimizer: null
 });
 
-
 // 針對開發環節下fis配置
 fis.media('prod').match('js/index.js', {
     parser: fis.plugin('browserify'),
@@ -123,7 +123,7 @@ fis.media('prod').match('js/index.js', {
     parser: fis.plugin('less'),
     rExt: '.css',
     isCssLike: true,
-    release: 'assets/css/main.min.css'
+    release: 'assets/css/main.min$1'
 }).match('*.js', {
     optimizer: fis.plugin('uglify-js')
 }).match('*.{css,less}', {
