@@ -96,16 +96,16 @@ fis.match('js/index.js', {
     release: 'js/dist/bundle$1'
 });
 
-fis.match('*.{js,css,png,jpg,gif}', {
+fis.match('*.{js,css}', {
     url: './$0',
-    // release: '$0',
-    // domain: '.'
+    //release: '$0',
+    //domain: '.'
 });
 
 fis.match('*.{png,jpg,gif}', {
     url: '../..$0',
-    // release: '$0',
-    // domain: '.',
+    //release: '$0',
+    //domain: '.',
 });
 
 // 針對開發環節下fis配置
@@ -125,10 +125,10 @@ fis.media('prod').match('js/index.js', {
     isCssLike: true,
     release: 'assets/css/main.min$1'
 }).match('*.js', {
-    optimizer: fis.plugin('uglify-js')
+    optimizer: fis.plugin('uglify-js'),
 }).match('*.{css,less}', {
     useSprite: true,
-    optimizer: fis.plugin('clean-css')
+    optimizer: fis.plugin('clean-css'),
 });
 
 // fis.media('prod').match('*.js', {
