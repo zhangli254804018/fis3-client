@@ -92,7 +92,7 @@ fis.hook('node_modules', {
 
 //可选参数, 高级配置
 fis.match('js/index.js', {
-    parser: fis.plugin('browserify'),
+    parser: fis.plugin('client'),
     release: 'js/dist/bundle$1'
 });
 
@@ -117,7 +117,7 @@ fis.media('dev').match('*', {
 
 // 針對開發環節下fis配置
 fis.media('prod').match('js/index.js', {
-    parser: fis.plugin('browserify'),
+    parser: fis.plugin('client'),
     release: 'js/dist/bundle.min$1'
 }).match('assets/less/main.less', {
     parser: fis.plugin('less'),
@@ -130,7 +130,6 @@ fis.media('prod').match('js/index.js', {
     useSprite: true,
     optimizer: fis.plugin('clean-css'),
 });
-
 // fis.media('prod').match('*.js', {
 //       domain: 'http://cdn.baidu.com/'
 //   });
