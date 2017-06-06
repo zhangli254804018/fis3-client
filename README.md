@@ -12,7 +12,7 @@
     b.新增解析parser-less 插件解析less文本文件
 
 ```
- "fis-parser-less": "^0.1.3",
+        "fis-parser-less": "^0.1.3",
         "fis-parser-utc": "^0.0.2",
         "fis3-hook-amd": "^0.2.0",
         "fis3-hook-commonjs": "^0.1.26",
