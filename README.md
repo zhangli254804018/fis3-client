@@ -32,4 +32,27 @@
         npm run build
 ```
 
-自定義插件 [fis3-parser-client](https://github.com/zhangli254804018/fis3-parser-client)
+使用項目結構為
+        依賴包：fis3-client
+        參考文件結構為:
+                -assets
+                        -img
+                        -less
+                        -css
+                        -pic
+                        -swf
+                        ……
+                js
+                        -api
+                        -dist
+                        -dev
+                        index.js
+                        ……
+                lib
+                        -jquery
+                        ……
+                fis-conf.js
+                package.json
+                        "fis3-client":"*"
+        [源码参考](https://github.com/zhangli254804018/fis3-client)
+        [fis3-parser-client](https://github.com/zhangli254804018/fis3-parser-client)
