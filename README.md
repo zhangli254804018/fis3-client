@@ -22,7 +22,7 @@
         "fis3-postpackager-loader": "^2.1.4",
         "fis3-postpackager-simple": "^0.0.27"
 ```
-        [fis3-parser-client]: https://github.com/zhangli254804018/fis3-client "fis3-parser-client"
+
 - 6、后期需要更多的优化兼容开发体验等 
 
 ```
@@ -31,3 +31,4 @@
         正式環境為
         npm run build
 ```
+[fis3-parser-client]: https://github.com/zhangli254804018/fis3-client "fis3-parser-client"
