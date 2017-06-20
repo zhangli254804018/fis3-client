@@ -1,4 +1,4 @@
-#fis-develop
+#fis3-client
 
 
 - 1、项目采用fis3开发结构项目
@@ -22,7 +22,7 @@
         "fis3-postpackager-loader": "^2.1.4",
         "fis3-postpackager-simple": "^0.0.27"
 ```
-        [fis3-parser-client](https://zhangli254804018.github.io/fis3-parser-client)
+        [fis3-parser-client]<https://github.com/zhangli254804018/fis3-client>
 - 6、后期需要更多的优化兼容开发体验等 
 
 ```
