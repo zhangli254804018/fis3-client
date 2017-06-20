@@ -1,0 +1,236 @@
+#rc-banner {
+    padding-top: 10px;
+    // background: @RCwhite;
+    .rc-banner {
+        #banfLTpl,
+        #banRLTpl {
+            overflow: hidden;
+        }
+        &-slider {
+            position: relative;
+            background: @RCwhite;
+             min-height: 420px;
+            //  padding-bottom: 5px;
+            .slider-focus {
+                position: relative;
+                width: 560px; // width: 560px;
+                height: 420px;
+                .banner {
+                    position: relative; // background: #f3f3f5 url('@{img-url}live/rc-loading.png') center center no-repeat;
+                    background: #000;
+                    #myDynamicContent {
+                        // display: none;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: 99; // background: #f3f3f5 url('@{img-url}live/rc-loading.png') center center no-repeat; 
+                        background: #000;
+                        border: none;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    ul.slides {
+                        position: relative;
+                        height: 420px;
+                        overflow: hidden;
+                        li {
+                            float: left;
+                            position: relative;
+                            a.link-banner {
+                                display: block;
+                                img {
+                                    width: 560px;
+                                    height: 420px;
+                                }
+                            }
+                            .icon-play {
+                                .icon-play();
+                            }
+                        }
+                    }
+                }
+                #bannerCtrl,
+                .dots {
+                    .flex-control-nav();
+                    width: 400px;
+                    z-index: 99;
+                    li {
+                        margin-left: 5px;
+                        *text-align: center;
+                        a,
+                        &.dot {
+                            .flex-control-nav-btn();
+                            margin-left: 20px;
+                            width: 12px;
+                            height: 12px;
+                            display: inline-block;
+                            *text-align: left;
+                            *display: inline-block;
+                            *zoom: 1;
+                            *float: left;
+                            vertical-align: middle;
+                            background: url('@{img-url}ic_slide_b_nomal.png') center center no-repeat;
+                        }
+                        &.active.dot {
+                            background: url('@{img-url}ic_slide_b_click.png') center center no-repeat;
+                        }
+                    }
+                }
+            }
+            .slider-rank {
+                position: relative;
+                .slider-item {
+                    display: block;
+                    margin: 0 0 5px 0;
+                    position: relative;
+                    height: 80px;
+                    width: 100%;
+                    cursor:hand;
+                    cursor:pointer;
+                    .banner {
+                        width: 230px;
+                        position: relative;
+                        overflow: hidden;
+                        ul.slides {
+                            position: relative;
+                            height: 80px;
+                            overflow: hidden;
+                            display: block;
+                            li {
+                                float: left;
+                                a.link-banner {
+                                    display: block;
+                                    position: relative;
+                                    img {
+                                        width: 230px;
+                                        width: 228px\9;
+                                        *width: 228px;
+                                        height: 80px; // background-size: cover !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    #bannerCtrl,
+                    .dots {
+                        .flex-control-nav();
+                        width: 100%;
+                        bottom: 0;
+                        z-index: 2;
+                        li {
+                            display: inline-block;
+                            zoom: 0;
+                            margin-left: 5px;
+                            *text-align: center;
+                            a,
+                            &.dot {
+                                .flex-control-nav-btn();
+                                margin-left: 10px;
+                                display: block;
+                                display: inline-block;
+                                *text-align: left;
+                                *display: block;
+                                *zoom: 1; // *float: left;
+                                bottom: 0;
+                            }
+                            &.active {
+                                a {
+                                    background: url('@{img-url}ic_slide_click.png') no-repeat;
+                                }
+                            }
+                        }
+                    }
+                    .banner-cover {
+                        content: '';
+                        position: absolute;
+                        top: -2px;
+                        left: 0;
+                        width: 230px;
+                        height: 84px;
+                        background-size: cover;
+                        z-index: 5;
+                        background: url('@{img-url}icon__ban_bg.png') no-repeat;
+                        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='@{img-url}icon__ban_bg.png');
+                        cursor: pointer;
+                        cursor: hand;
+                    }
+                    &.active {
+                        .banner-cover{
+                            content: '';
+                            background: url('@{img-url}btn_slider_click.png') no-repeat;
+                            position: absolute;
+                            top: -2px;
+                            left: -7px;
+                            width: 239px;
+                            height: 84px;
+                            z-index: 0;
+                            background-size: cover;
+                            filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='@{img-url}btn_slider_click.png');
+                            cursor: pointer;
+                            cursor: hand;
+                        }
+                    }
+                    &-active {
+                        background: url('@{img-url}btn_slider_click.png') no-repeat;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 239px;
+                        height: 84px; // background-size: 100%;
+                        z-index: 2;
+                    }
+                    .arrows {
+                        position: absolute;
+                        bottom: 0px;
+                        width: 100%;
+                        bottom: 0;
+                        top: 0;
+                        margin: auto 0;
+                        height: 20px;
+                        span {
+                            cursor: pointer; //    position: absolute;
+                            display: block;
+                            color: @RCwhite;
+                            z-index: 99;
+                            display: block;
+                            &.prev {
+                                float: left;
+                                margin-left: 5px;
+                            }
+                            &.next {
+                                float: right;
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                    &.slider-show,
+                    &.slider-game {
+                        ul>li {
+                            a.link-banner {
+                                &:after {
+                                    content: '';
+                                    width: 100%;
+                                    height: 19px;
+                                    position: absolute;
+                                    bottom: 0;
+                                    z-index: 0;
+                                    background: url('@{img-url}bn_cover.png') no-repeat;
+                                    background-size: cover;
+                                }
+                            }
+                        }
+                    }
+                    a.slider-link{
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        display: block;
+                        z-index: 2;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,105 @@
+@import "normalize.less";
+/* clear float */
+
+.clearfix:before{
+  content: '';
+  display: table;
+}
+
+.clearfix:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
+.fl{
+  float: left;
+}
+
+.fr{
+  float: right;
+}
+
+/* margin */
+.mt5{
+  margin-top: 5px;
+}
+.mt8{
+  margin-top: 8px;
+}
+.mt10{
+  margin-top: 10px;
+}
+.mt20{
+  margin-top: 20px;
+}
+
+.ml5{
+  margin-left: 5px;
+}
+.ml10{
+  margin-left: 10px;
+}
+
+.mb10{
+  margin-bottom: 10px;
+}
+
+.mb20{
+  margin-bottom: 20px;
+}
+
+/* padding */
+.pl10{
+  padding-left: 10px;
+}
+.p020{
+  padding: 0 20px;
+}
+.pt20{
+  padding-top: 20px;
+}
+.pb20{
+  padding-bottom: 20px;
+}
+
+/* text */
+.tc{
+  text-align: center;
+}
+.tr{
+  text-align: right;
+}
+.tl{
+  text-align: left;
+}
+
+/* width */
+.w800{
+  width: 800px;
+  margin: 0 auto;
+}
+.w1000{
+  width: 1000px;
+  margin: 0 auto;
+}
+.w1200{
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.wauto{
+  margin: 0 auto;
+}
+
+
+/* gradient */
+.linear-gradient(@dir, @from, @to){
+    background: @from;
+    background: -webkit-linear-gradient(@dir, @from, @to);
+    background: -moz-linear-gradient(@dir, @from, @to);
+    background: -ms-linear-gradient(@dir, @from, @to);
+    background: linear-gradient(@dir, @from, @to);
+}
+
+
