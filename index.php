@@ -520,7 +520,7 @@
         a.src = g;
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    // ga('create', 'UA-65869892-2', { userId: <?php echo $uid; ?>});
+    // ga('create', 'UA-6586989-', { userId: <?php echo $uid; ?>});
     ga('send', 'pageview');
 </script>
 <?php if ($debug) {?>

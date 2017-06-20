@@ -24,14 +24,16 @@ fis.set('project.ignore', [
     'package.json',
     'LICENSE',
     '*.md',
-    '*.lock'
+    '*.lock',
+    '*.yml'
 ]);
 
-fis.config.set('modules.postpackager', 'simple');
-//开始autoCombine可以将零散资源进行自动打包
-fis.config.set('settings.postpackager.simple.autoCombine', true);
-//开启autoReflow使得在关闭autoCombine的情况下，依然会优化脚本与样式资源引用位置
-fis.config.set('settings.postpackager.simple.autoReflow', true);
+// fis.config.set('modules.postpackager', 'simple');
+// //开始autoCombine可以将零散资源进行自动打包
+// fis.config.set('settings.postpackager.simple.autoCombine', true);
+// //开启autoReflow使得在关闭autoCombine的情况下，依然会优化脚本与样式资源引用位置
+// fis.config.set('settings.postpackager.simple.autoReflow', true);
+
 // packOrder
 // 解释：用来控制合并时的顺序，值越小越在前面。配合 packTo 一起使用。
 // 值类型：Integer

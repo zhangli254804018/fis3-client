@@ -7,19 +7,18 @@
         "doc": "doc"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "dev": "rm -rf ./dev & fis3 release -d ./dev  -cwL",
+        "build": "rm -rf ./dist & fis3 release prod -d ./dist -l"
     },
     "dependencies": {
-        "fis3": "^3.4.33",
+        "fis3": "^3.3.0",
         "fis-parser-less": "^0.1.3",
         "fis-parser-utc": "^0.0.2",
         "fis3-hook-amd": "^0.2.0",
         "fis3-hook-commonjs": "^0.1.26",
         "fis3-hook-node_modules": "^2.2.8",
         "fis3-parser-client": "*",
-        "fis3-postpackager-autoloader": "^1.0.2",
-        "fis3-postpackager-loader": "^2.1.4",
-        "fis3-postpackager-simple": "^0.0.27"
+        "fis3-postpackager-loader": "^2.1.4"
     },
     "repository": {
         "type": "git",
