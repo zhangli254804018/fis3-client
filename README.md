@@ -56,8 +56,8 @@
         npm run build
 ```
 
-* [源码参考](https://github.com/zhangli254804018/fis3-client)
-* [fis3-parser-client](https://github.com/zhangli254804018/fis3-parser-client)
+* [架构源码参考](https://github.com/zhangli254804018/fis3-client)
+* [第三方插件-fis3-parser-client](https://github.com/zhangli254804018/fis3-parser-client)
 
 
 
