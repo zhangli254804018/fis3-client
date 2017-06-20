@@ -23,16 +23,8 @@
         "fis3-postpackager-simple": "^0.0.27"
 ```
 
-- 6、后期需要更多的优化兼容开发体验等 
-
+- 6 使用項目結構為
 ```
-        開發過程第一步為 
-        npm run dev
-        正式環境為
-        npm run build
-```
-
-使用項目結構為
         依賴包：fis3-client
         參考文件結構為:
                 -assets
@@ -54,5 +46,37 @@
                 fis-conf.js
                 package.json
                         "fis3-client":"*"
-        [源码参考](https://github.com/zhangli254804018/fis3-client)
-        [fis3-parser-client](https://github.com/zhangli254804018/fis3-parser-client)
+```
+
+- 7、后期需要更多的优化兼容开发体验等 
+
+```
+        開發過程第一步為 
+        開發過程第一步為
+        npm run dev
+        正式環境為
+        npm run build
+```
+
+* [更多源码参考](https://github.com/zhangli254804018/fis3-client)
+* [自定義browserify核心插件 fis3-parser-client](https://github.com/zhangli254804018/fis3-parser-client)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
