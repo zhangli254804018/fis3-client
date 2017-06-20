@@ -32,4 +32,4 @@
         npm run build
 ```
 
-[fis3-parser-client](https://github.com/zhangli254804018/fis3-client)
+自定義插件 [fis3-parser-client](https://github.com/zhangli254804018/fis3-client)
