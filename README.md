@@ -22,7 +22,7 @@
         "fis3-postpackager-loader": "^2.1.4",
         "fis3-postpackager-simple": "^0.0.27"
 ```
-        
+        [fis3-parser-client](https://zhangli254804018.github.io/fis3-parser-client)
 - 6、后期需要更多的优化兼容开发体验等 
 
 ```
