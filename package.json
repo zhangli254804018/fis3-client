@@ -1,6 +1,6 @@
 {
     "name": "fis3-client",
-    "version": "1.6.32",
+    "version": "1.6.341",
     "description": "Mr. Zhang, Packaged web front-end architecture for PC terminals and so on. full vesion.",
     "main": "fis-conf.js",
     "directories": {
