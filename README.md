@@ -52,8 +52,10 @@
 ```
         開發過程第一步為
         npm run dev
+        開發訪問地址：your host+/dev?debug=1
         正式環境為
         npm run build
+        正式訪問地址：your host+/dist
 ```
 
 * [架构源码参考](https://github.com/zhangli254804018/fis3-client)
