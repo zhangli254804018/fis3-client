@@ -65,6 +65,7 @@
 ```
 
 * [架构源码参考](https://github.com/zhangli254804018/fis3-client)
+* [構造項目結構-fis3-generator-client](https://www.npmjs.com/package/fis3-generator-client)
 * [核心依賴插件-fis3-parser-client](https://www.npmjs.com/package/fis3-parser-client)
 
 
