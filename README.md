@@ -33,7 +33,7 @@
         "fis3-hook-amd": "^0.2.0",
         "fis3-hook-commonjs": "^0.1.26",
         "fis3-hook-node_modules": "^2.2.8",
-        "fis3-parser-client": "*",
+        "fis3-parser-client": "^1.2.2",
         "fis3-postpackager-autoloader": "^1.0.2",
         "fis3-postpackager-loader": "^2.1.4",
         "fis3-postpackager-simple": "^0.0.27"
