@@ -64,6 +64,7 @@
 ```
 
 - 7、后期需要更多的优化兼容开发体验等
+- 8、更新fis3-parser-client fis3-generator-client新增兼容ie編譯js腳本
 
 * [架构源码参考](https://github.com/zhangli254804018/fis3-client)
 * [構造項目結構-fis3-generator-client](https://www.npmjs.com/package/fis3-generator-client)
