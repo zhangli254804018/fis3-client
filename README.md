@@ -1,5 +1,21 @@
 #fis3-client
 
+#使用規則更新
+[構建工具](https://zhangli254804018.github.io/fis3-generator-client/)
+```
+        構建項目初始化
+        npm i fis3-generator-client -g
+        生成項目
+        fisc myapp
+        下載依賴包
+        npm i
+        進行開發
+        npm run dev
+        開發訪問地址：your host
+        正式環境為
+        npm run build
+        正式訪問地址：your host
+```
 
 - 1、项目采用fis3开发结构项目
 - 2、支持common.js写法等 不依赖requirejs等
@@ -48,21 +64,6 @@
 ```
 
 - 7、后期需要更多的优化兼容开发体验等
-
-```
-        構建項目初始化
-        npm i fis3-generator-client -g
-        生成項目
-        fisc myapp
-        下載依賴包
-        npm i
-        進行開發
-        npm run dev
-        開發訪問地址：your host
-        正式環境為
-        npm run build
-        正式訪問地址：your host
-```
 
 * [架构源码参考](https://github.com/zhangli254804018/fis3-client)
 * [構造項目結構-fis3-generator-client](https://www.npmjs.com/package/fis3-generator-client)
